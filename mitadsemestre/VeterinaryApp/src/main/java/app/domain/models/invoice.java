@@ -11,27 +11,21 @@ import lombok.Setter;
 @NoArgsConstructor
 
 
-public class invoice {
+public class Invoice {
     
-    private long invioceId;
-    private long petId;
-    private long ownerId;
-    private long orderId;
+    private long invoiceId;
+    private Order order;
     private String item;
     private double amount;
-    private double value;
+    private long medicationQuantity;
     private Timestamp date;
-    
-    public invoice(long invioceId, long petId, long ownerId, long orderId, String item, double amount, double value,
-            Timestamp date) {
-        this.invioceId = invioceId;
-        this.petId = petId;
-        this.ownerId = ownerId;
-        this.orderId = orderId;
+
+    public Invoice(long invoiceId, Order order, String item, double amount, long medicationQuantity, Timestamp date) {
+        this.invoiceId = invoiceId;
+        this.order = order;
         this.item = item;
         this.amount = amount;
-        this.value = value;
+        this.medicationQuantity = medicationQuantity;
         this.date = date;
     }
-    
 }

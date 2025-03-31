@@ -2,8 +2,10 @@ package app.ports;
 
 import java.util.List;
 
-public interface orderPort {
-    public List<orderPort> getAllOrderPort();
-    public List<orderPort> getAllOrderPortByVet();
-    public List<orderPort> getAllOrderPortBySeller();
+import app.domain.models.Order;
+
+public interface OrderPort {
+    public void saveOrder(Order order)throws Exception;
+    public Order findByOrderId(long orderId)throws Exception;
+    public List<Order> getAllOrder()throws Exception;
 }

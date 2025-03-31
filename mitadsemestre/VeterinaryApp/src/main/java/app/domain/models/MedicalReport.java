@@ -10,36 +10,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class medicalRecord {
+public class MedicalReport {
     
+    private long MedicalReportId;
     private Timestamp dateCreated;
-    private String vet;
-    private String reasonConsultation;
+    private String Consultation;
     private String symptoms;
     private String diagnostic;
     private String procedure;
-    private String item;
-    private String dose;
+    private Order order;
     private String vaccinationHistory;
     private String allergies;
     private String detailProcedure;
-    private boolean isActive;
     
-    public medicalRecord(Timestamp dateCreated, String vet, String reasonConsultation, String symptoms,
-            String diagnostic, String procedure, String item, String dose, String vaccinationHistory, String allergies,
-            String detailProcedure, boolean isActive) {
+    public MedicalReport(long medicalReportId, Timestamp dateCreated, String consultation, String symptoms,
+            String diagnostic, String procedure, Order order, String vaccinationHistory, String allergies,
+            String detailProcedure) {
+        MedicalReportId = medicalReportId;
         this.dateCreated = dateCreated;
-        this.vet = vet;
-        this.reasonConsultation = reasonConsultation;
+        Consultation = consultation;
         this.symptoms = symptoms;
         this.diagnostic = diagnostic;
         this.procedure = procedure;
-        this.item = item;
-        this.dose = dose;
+        this.order = order;
         this.vaccinationHistory = vaccinationHistory;
         this.allergies = allergies;
         this.detailProcedure = detailProcedure;
-        this.isActive = isActive;
     }
-    
 }

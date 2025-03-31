@@ -1,11 +1,10 @@
 package app.ports;
 
-import app.domain.models.pet;
+import app.domain.models.Pet;
 
-public interface petPort {
+public interface PetPort {
     
-    public boolean existPet(long petId);
-    public void savePet(pet pet);
-    public pet findByPetId(long petId);
-    
+    public void savePet(Pet pet)throws Exception;
+    public Pet findByOwnerDocument(Long personDocument)throws Exception;
+    public Pet findByPetId(Long petId)throws Exception;
 }

@@ -1,6 +1,6 @@
 package app.adapters.users.entity;
 
-import app.adapters.persons.entity.personEntity;
+import app.adapters.persons.entity.PersonEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,13 +17,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 
-public class userEntity {
+public class UserEntity {
     @Id
     @Column(name = "user_id")
     private long userId;
     @JoinColumn(name = "document")
     @OneToOne
-    private personEntity person;
+    private PersonEntity person;
     @Column (name = "user_name")
     private String userName;
     @Column (name = "password")

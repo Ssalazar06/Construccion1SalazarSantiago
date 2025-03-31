@@ -2,11 +2,12 @@ package app.adapters.users.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import app.adapters.users.entity.userEntity;
+import app.adapters.users.entity.UserEntity;
 
-public interface userRepository extends JpaRepository<userEntity, Long>{
+public interface UserRepository extends JpaRepository<UserEntity, Long>{
     
-    public boolean existByUserName(String userName);
-    public userEntity findByPersonDocument(long personDocument);
+    public boolean existsByUserName(String userName);
+    public UserEntity findByPersonDocument(long personDocument);
+    public UserEntity findByUserName(String userName);
     
 }

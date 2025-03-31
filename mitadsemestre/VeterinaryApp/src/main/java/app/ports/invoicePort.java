@@ -1,11 +1,10 @@
 package app.ports;
 
 import java.util.List;
-import app.domain.models.invoice;
+import app.domain.models.Invoice;
 
-public interface invoicePort {
-    public  List<invoice> getAllInvoice();
-    public List<invoice> getInvoicesByVet();
-    public List<invoice> getInvioceBySeller();
-    
+public interface InvoicePort {
+    public void saveInvoice(Invoice invoice)throws Exception;
+    public Invoice findByInvoiceId(long invoiceId)throws Exception;
+    public List<Invoice> getAllInvoice()throws Exception;
 }

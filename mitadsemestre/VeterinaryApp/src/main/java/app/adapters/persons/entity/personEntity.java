@@ -14,11 +14,11 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 
-public class personEntity {
+public class PersonEntity {
     
     @Id
     @Column(name = "document")
-    private long document;
+    private long personDocument;
     @Column(name = "person_name")
     private String personName;
     @Column(name = "person_Age")

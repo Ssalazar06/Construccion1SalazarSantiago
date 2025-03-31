@@ -1,11 +1,11 @@
 package app.ports;
 
-import app.domain.models.user;
+import app.domain.models.User;
 
-public interface userPort {
+public interface UserPort {
     
-    public boolean existUserName(String userName);
-    public void saveUser(user user);
-    public user findByPersonId(long personId);
-
+    public boolean existUserName(String userName)throws Exception;
+    public void saveUser(User user)throws Exception;
+    public User findByPersonDocument(long personDocument)throws Exception;
+    public User findByUserName(User userName)throws Exception;
 }

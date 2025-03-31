@@ -10,16 +10,26 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 
-public class order {
+public class Order {
 
     private long orderId;
-    private String item;
+    private Pet pet;
+    private Person owner;
+    private User veterinarian;
+    private String medicationName;
+    private double medicationDosis;
+    private String orderStatus;
     private Timestamp date;
-    
-    public order(long orderId, String item, Timestamp date) {
+
+    public Order(long orderId, Pet pet, Person owner, User veterinarian, String medicationName, double medicationDosis,
+            String orderStatus, Timestamp date) {
         this.orderId = orderId;
-        this.item = item;
+        this.pet = pet;
+        this.owner = owner;
+        this.veterinarian = veterinarian;
+        this.medicationName = medicationName;
+        this.medicationDosis = medicationDosis;
+        this.orderStatus = orderStatus;
         this.date = date;
     }
-    
 }

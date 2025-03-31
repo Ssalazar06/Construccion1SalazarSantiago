@@ -8,26 +8,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class pet {
+public class Pet {
 
     private String petName;
-    private long ownerId;
+    private long personId;
     private long petAge;
     private long petId;
-    private String species;
-    private String race;
-    private String characteristics;
-    private long weigth;
-    
-    public pet(String petName, long ownerId, long petAge, long petId, String species, String race,
-            String characteristics, long weigth) {
+    private String petSpecies;
+    private String petRace;
+    private String petCharacteristics;
+    private double petWeight;
+
+    public Pet(String petName, long personId, long petAge, long petId, String petSpecies, String petRace,
+            String petCharacteristics, long petWeight) {
         this.petName = petName;
-        this.ownerId = ownerId;
+        this.personId = personId;
         this.petAge = petAge;
         this.petId = petId;
-        this.species = species;
-        this.race = race;
-        this.characteristics = characteristics;
-        this.weigth = weigth;
+        this.petSpecies = petSpecies;
+        this.petRace = petRace;
+        this.petCharacteristics = petCharacteristics;
+        this.petWeight = petWeight;
+    }
+
+    public void setPersonDocument(Person person) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPersonDocument'");
     }
 }
