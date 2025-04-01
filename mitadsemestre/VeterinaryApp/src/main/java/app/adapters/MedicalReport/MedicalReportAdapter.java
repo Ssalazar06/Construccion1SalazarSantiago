@@ -36,7 +36,7 @@ public class MedicalReportAdapter implements MedicalReportPort{
         MedicalReportEntity medicalReportEntity = medicalReportAdapter(medicalReport);
         MedicalReportRepository.save(medicalReportEntity);
         medicalReport.setMedicalReportId((long) medicalReportEntity.getMedicalReportId());
-        medicalReport.setDateCreated(medicalReportEntity.getDate());
+        medicalReport.setDateCreated(medicalReportEntity.getDateCreated());
         System.out.println("Historia Clinica Guardada!");
     }  
     
@@ -50,7 +50,7 @@ public class MedicalReportAdapter implements MedicalReportPort{
             private MedicalReportEntity medicalReportAdapter(MedicalReport MedicalReport){
         MedicalReportEntity medicalReportEntity = new MedicalReportEntity();
         medicalReportEntity.setMedicalReportId(MedicalReport.getMedicalReportId());
-        medicalReportEntity.setDate(MedicalReport.getDateCreated());
+        medicalReportEntity.setDateCreated(MedicalReport.getDateCreated());
         medicalReportEntity.setConsultation(MedicalReport.getConsultation());
         medicalReportEntity.setSymptoms(MedicalReport.getSymptoms());
         medicalReportEntity.setDiagnostic(MedicalReport.getDiagnostic());
@@ -65,7 +65,7 @@ public class MedicalReportAdapter implements MedicalReportPort{
     private MedicalReport medicalReportAdapter(MedicalReportEntity medicalReportEntity){
         MedicalReport medicalReport = new MedicalReport();
         medicalReport.setMedicalReportId((long) medicalReportEntity.getMedicalReportId());
-        medicalReport.setDateCreated(medicalReportEntity.getDate());
+        medicalReport.setDateCreated(medicalReportEntity.getDateCreated());
         medicalReport.setConsultation(medicalReportEntity.getConsultation());
         medicalReport.setSymptoms(medicalReportEntity.getSymptoms());
         medicalReport.setDiagnostic(medicalReportEntity.getDiagnostic());
@@ -115,9 +115,9 @@ public class MedicalReportAdapter implements MedicalReportPort{
 
     private PersonEntity personAdapter(Person person){
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(person.getPersonName());
-        personEntity.setPersonDocument(person.getPersonDocument());
-        person.setPersonAge(person.getPersonAge());
+        personEntity.setName(person.getName());
+        personEntity.setDocument(person.getDocument());
+        personEntity.setAge(person.getAge());
         return personEntity;
     }
 
@@ -134,17 +134,16 @@ public class MedicalReportAdapter implements MedicalReportPort{
 
     private Person personAdapter(PersonEntity personEntity){
         Person person = new Person();
-        person.setPersonName(personEntity.getPersonName());
-        person.setPersonDocument(personEntity.getPersonDocument());
-        person.setPersonAge(personEntity.getPersonAge());
+        person.setName(personEntity.getName());
+        person.setDocument(personEntity.getDocument());
+        person.setAge(personEntity.getAge());
         return person;
     }
-
-        private User userAdapter(UserEntity userEntity){
+    public User userAdapter(UserEntity userEntity){
         User user = new User();
-        user.setPersonDocument(userEntity.getPerson().getPersonDocument());
-        user.setPersonName(userEntity.getPerson().getPersonName());
-        user.setPersonAge(userEntity.getPerson().getPersonAge());
+        user.setDocument(userEntity.getPerson().getDocument());
+        user.setName(userEntity.getPerson().getName());
+        user.setAge(userEntity.getPerson().getAge());
         user.setUserId(userEntity.getUserId());
         user.setUserName(userEntity.getUserName());
         user.setPassword(userEntity.getPassword());
@@ -155,9 +154,9 @@ public class MedicalReportAdapter implements MedicalReportPort{
     private UserEntity userAdapter(User user){
         //reemplazo metodo personAdpter por mala implementación
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(user.getPersonName());
-        personEntity.setPersonDocument(user.getPersonDocument());
-        personEntity.setPersonAge(user.getPersonAge());
+        personEntity.setName(user.getName());
+        personEntity.setDocument(user.getDocument());
+        personEntity.setAge(user.getAge());
 
         UserEntity userEntity = new UserEntity();
         userEntity.setPerson(personEntity);

@@ -4,14 +4,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleValidator {
-    public String stringValidator(String value, String element) throws Exception{
+    public static String stringValidator(String value, String element) throws Exception{
         if(value ==null || value.equals("")){
             throw new Exception(element + " no tiene un valor valido");
         }
         return value;
     }
 
-    public long longValidator(String value, String element) throws Exception{
+    public static long longValidator(String value, String element) throws Exception{
         try{
             return Long.parseLong(stringValidator(value, element));
         }

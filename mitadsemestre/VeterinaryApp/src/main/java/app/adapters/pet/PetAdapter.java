@@ -28,8 +28,8 @@ public class PetAdapter implements PetPort{
     }
 
     @Override
-    public Pet findByOwnerDocument(Long personDocument)throws Exception{
-        PetEntity petEntity = petRepository.findByOwnerDocument(personDocument);
+    public Pet findByOwnerDocument(Long Document)throws Exception{
+        PetEntity petEntity = petRepository.findByOwnerDocument(Document);
         if(petEntity == null){
             throw new Exception("No existe un Cliente con esa cedula");
         }
@@ -57,19 +57,19 @@ public class PetAdapter implements PetPort{
         petEntity.setPetWeight(pet.getPetWeight());
         return petEntity;
     }
-    private PersonEntity personAdapter(long person){
+    private PersonEntity personAdapter(Person person){
             PersonEntity personEntity = new PersonEntity();
-            personEntity.setPersonName(person.getPersonName());
-            personEntity.setPersonDocument(person.getPersonDocument());
-            personEntity.setPersonAge(person.getPersonAge());
+            personEntity.setName(person.getName());
+            personEntity.setDocument(person.getDocument());
+            personEntity.setAge(person.getAge());
         return personEntity;
     }
 
     private Person personAdapter(PersonEntity personEntity){
         Person person = new Person();
-        person.setPersonName(personEntity.getPersonName());
-        person.setPersonDocument(personEntity.getPersonDocument());
-        person.setPersonAge(personEntity.getPersonAge());
+        person.setName(personEntity.getName());
+        person.setDocument(personEntity.getDocument());
+        person.setAge(personEntity.getAge());
         return person;
     }
 

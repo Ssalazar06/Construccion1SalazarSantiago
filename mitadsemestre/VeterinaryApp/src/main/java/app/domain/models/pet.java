@@ -11,16 +11,16 @@ import lombok.Setter;
 public class Pet {
 
     private String petName;
-    private long personId;
+    private Person personId;
     private long petAge;
     private long petId;
     private String petSpecies;
     private String petRace;
     private String petCharacteristics;
-    private double petWeight;
+    private double petWeight; 
 
-    public Pet(String petName, long personId, long petAge, long petId, String petSpecies, String petRace,
-            String petCharacteristics, long petWeight) {
+    public Pet(String petName, Person personId, long petAge, long petId, String petSpecies, String petRace,
+            String petCharacteristics, double petWeight) {
         this.petName = petName;
         this.personId = personId;
         this.petAge = petAge;
@@ -29,10 +29,5 @@ public class Pet {
         this.petRace = petRace;
         this.petCharacteristics = petCharacteristics;
         this.petWeight = petWeight;
-    }
-
-    public void setPersonDocument(Person person) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPersonDocument'");
     }
 }

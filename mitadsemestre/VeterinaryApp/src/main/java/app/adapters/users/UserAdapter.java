@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import app.adapters.persons.entity.PersonEntity;
 import app.adapters.users.entity.UserEntity;
 import app.adapters.users.repository.UserRepository;
-import app.domain.models.Person;
 import app.domain.models.User;
 import app.ports.UserPort;
 import lombok.Getter;
@@ -21,7 +20,7 @@ public class UserAdapter implements UserPort{
     @Autowired
     public UserRepository userRepository;
 
-    private User user;
+    public User user;
 
     @Override
     public User findByUserName(User user) throws Exception{
@@ -40,24 +39,19 @@ public class UserAdapter implements UserPort{
 
     @Override
     public void saveUser(User user){
-        System.out.println("datos que llegan al user adapter: " + user.getPersonName() + " " + user.getPersonDocument());
+        System.out.println("datos que llegan al user adapter: " + user.getName() + " " + user.getDocument());
         UserEntity userEntity = userAdapter(user);
-        System.out.println("datos antes de ser guardados: "+ userEntity.getUserName() + " " + userEntity.getPerson().getPersonDocument());
+        System.out.println("datos antes de ser guardados: "+ userEntity.getUserName() + " " + userEntity.getPerson().getDocument());
         userRepository.save(userEntity);
         user.setUserId(userEntity.getUserId());
-    }
-
-    @Override
-    public User findByPersonDocument(Long personDocument)throws Exception {
-        return user.findByPersonDocument(this, personDocument);
     }
     
 
     public User userAdapter(UserEntity userEntity){
         User user = new User();
-        user.setPersonDocument(userEntity.getPerson().getPersonDocument());
-        user.setPersonName(userEntity.getPerson().getPersonName());
-        user.setPersonAge(userEntity.getPerson().getPersonAge());
+        user.setDocument(userEntity.getPerson().getDocument());
+        user.setName(userEntity.getPerson().getName());
+        user.setAge(userEntity.getPerson().getAge());
         user.setUserId(userEntity.getUserId());
         user.setUserName(userEntity.getUserName());
         user.setPassword(userEntity.getPassword());
@@ -68,9 +62,9 @@ public class UserAdapter implements UserPort{
     private UserEntity userAdapter(User user){
         //reemplazo metodo personAdpter por mala implementación
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(user.getPersonName());
-        personEntity.setPersonDocument(user.getPersonDocument());
-        personEntity.setPersonAge(user.getPersonAge());
+        personEntity.setName(user.getName());
+        personEntity.setDocument(user.getDocument());
+        personEntity.setAge(user.getAge());
 
         UserEntity userEntity = new UserEntity();
         userEntity.setPerson(personEntity);
@@ -83,9 +77,8 @@ public class UserAdapter implements UserPort{
 
 
     @Override
-    public User findByPersonDocument(long personDocument) throws Exception {
+    public User findByPersonDocument(long Document) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findByPersonDocument'");
     }
-
 }

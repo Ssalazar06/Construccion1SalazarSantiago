@@ -72,9 +72,9 @@ public class InvoiceAdapter implements InvoicePort{
 
     private PersonEntity personAdapter(Person person){
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(person.getPersonName());
-        personEntity.setPersonDocument(person.getPersonDocument());
-        person.setPersonAge(person.getPersonAge());
+        personEntity.setName(person.getName());
+        personEntity.setDocument(person.getDocument());
+        personEntity.setAge(person.getAge());
         return personEntity;
     }
 
@@ -103,9 +103,9 @@ public class InvoiceAdapter implements InvoicePort{
 
     private Person personAdapter(PersonEntity personEntity){
         Person person = new Person();
-        person.setPersonName(personEntity.getPersonName());
-        person.setPersonDocument(personEntity.getPersonDocument());
-        person.setPersonAge(personEntity.getPersonAge());
+        person.setName(personEntity.getName());
+        person.setDocument(personEntity.getDocument());
+        person.setAge(personEntity.getAge());
         return person;
     }
 
@@ -139,9 +139,9 @@ public class InvoiceAdapter implements InvoicePort{
     private User userAdapter(UserEntity userEntity){
         User user = new User();
         user.setUserId(userEntity.getUserId());
-        user.setPersonName(userEntity.getPerson().getPersonName());
-        user.setPersonDocument(userEntity.getPerson().getPersonDocument());
-        user.setPersonAge(userEntity.getPerson().getPersonAge());
+        user.setName(userEntity.getPerson().getName());
+        user.setDocument(userEntity.getPerson().getDocument());
+        user.setAge(userEntity.getPerson().getAge());
         user.setUserName(userEntity.getUserName());
         return user;
     }

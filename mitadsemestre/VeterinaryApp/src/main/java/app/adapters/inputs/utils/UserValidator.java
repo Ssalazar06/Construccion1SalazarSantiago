@@ -9,7 +9,7 @@ public class UserValidator extends SimpleValidator{
         return stringValidator(value, "nombre de la persona");
     }
 
-    public long documentValudator(String value) throws Exception{
+    public long documentValidator(String value) throws Exception{
         return longValidator(value, "numero de documento");
     }
     

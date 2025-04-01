@@ -30,7 +30,7 @@ public class OrderEntity {
     @JoinColumn(name="pet_id")
     @OneToOne
     private PetEntity pet;
-    @JoinColumn(name =("document"))
+    @JoinColumn(name =("person_Document"))
     @OneToOne
     private PersonEntity person;
     @JoinColumn(name = "user_id")

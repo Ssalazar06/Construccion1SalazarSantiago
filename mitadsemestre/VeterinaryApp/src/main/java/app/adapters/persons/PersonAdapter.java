@@ -20,19 +20,19 @@ public class PersonAdapter implements PersonPort {
     @Autowired
     private PersonRepository personRepository;
 
-    public boolean existsPerson(long personDocument){
-        return personRepository.existsByPersonDocument(personDocument);
+    public boolean existsPerson(long document){
+        return personRepository.existsByDocument(document);
     }
 
     public void savePerson(Person person){
         PersonEntity personEntity = personAdapter(person);        
         personRepository.save(personEntity);
-        person.setPersonDocument(personEntity.getPersonDocument());
+        person.setDocument(personEntity.getDocument());
         System.out.println("Cliente Creado.");
     }
     
-    public Person findByPersonDocument(long personDocument)throws Exception{
-        PersonEntity personEntity = personRepository.findByPersonDocument(personDocument);
+    public Person findByPersonDocument(long document)throws Exception{
+        PersonEntity personEntity = personRepository.findByDocument(document);
         if(personEntity==null){
             throw new Exception("No existe una persona con ese documento");
         }
@@ -42,24 +42,30 @@ public class PersonAdapter implements PersonPort {
     
     private Person personAdapter(PersonEntity personEntity){
         Person person = new Person();
-        person.setPersonName(personEntity.getPersonName());
-        person.setPersonDocument(personEntity.getPersonDocument());
-        person.setPersonAge(personEntity.getPersonAge());
+        person.setName(personEntity.getName());
+        person.setDocument(personEntity.getDocument());
+        person.setAge(personEntity.getAge());
         return person;
     }
 
     private PersonEntity personAdapter(Person person){
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(person.getPersonName());
-        personEntity.setPersonDocument(person.getPersonDocument());
-        personEntity.setPersonAge(person.getPersonAge());
+        personEntity.setName(person.getName());
+        personEntity.setDocument(person.getDocument());
+        personEntity.setAge(person.getAge());
         return personEntity;
     }
 
     @Override
-    public boolean existPerson(long personDocument) {
+    public boolean existPerson(long document) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'existPerson'");
+    }
+
+    @Override
+    public Person getPersonId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPersonId'");
     }
     
 }

@@ -18,10 +18,10 @@ public class PersonEntity {
     
     @Id
     @Column(name = "document")
-    private long personDocument;
-    @Column(name = "person_name")
-    private String personName;
-    @Column(name = "person_Age")
-    private long personAge;
+    private long document;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "age")
+    private long age;
 
 }

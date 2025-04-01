@@ -9,7 +9,6 @@ import app.adapters.inputs.utils.PersonValidator;
 import app.adapters.inputs.utils.PetValidator;
 import app.adapters.inputs.utils.UserValidator;
 import app.adapters.inputs.utils.Utils;
-import app.domain.models.MedicalRecord;
 import app.domain.models.MedicalReport;
 import app.domain.models.Order;
 import app.domain.models.Person;
@@ -20,11 +19,11 @@ import app.ports.InputPort;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Setter
 @Getter
 @NoArgsConstructor
 @Component
+
 public class AdminInput implements InputPort{
     @Autowired
     private PersonValidator personValidator;
@@ -117,9 +116,9 @@ public class AdminInput implements InputPort{
         System.out.print("Ingrese la contraseña de veterinario: ");
         String password = userValidator.passwordValidator(Utils.getReader().nextLine());
         User user = new User();
-        user.setPersonName(name);
-        user.setPersonDocument(document);
-        user.setPersonAge(age);
+        user.setName(name);
+        user.setDocument(document);
+        user.setAge(age);
         user.setUserName(userName);
         user.setPassword(password);
         user.setRole("veterinary");
@@ -142,9 +141,9 @@ public class AdminInput implements InputPort{
         System.out.print("Ingrese la contraseña de vendedor: ");
         String password = userValidator.passwordValidator(Utils.getReader().nextLine());
         User user = new User();
-        user.setPersonName(name);
-        user.setPersonDocument(document);
-        user.setPersonAge(age);
+        user.setName(name);
+        user.setDocument(document);
+        user.setAge(age);
         user.setUserName(userName);
         user.setPassword(password);
         user.setRole("seller");
@@ -163,9 +162,9 @@ public class AdminInput implements InputPort{
         System.out.print("Edad de la persona: ");
         int age = personValidator.ageValidator(Utils.getReader().nextLine());
         Person person = new Person();
-        person.setPersonName(name);
-        person.setPersonDocument(document);
-        person.setPersonAge(age);
+        person.setName(name);
+        person.setDocument(document);
+        person.setAge(age);
         adminService.registerOwner(person);
         System.out.println("Cliente Registrado");
         System.out.println(toStringPerson(person));
@@ -186,7 +185,7 @@ public class AdminInput implements InputPort{
         double weigth = petValidator.weigthValidator(Utils.getReader().nextLine());
         Pet pet = new Pet();
         Person owner = new Person();
-        owner.setPersonDocument(personDocument);
+        owner.setDocument(personDocument);
         pet.setPersonId(owner);
         pet.setPetAge(age);
         pet.setPetName(name);
@@ -194,7 +193,6 @@ public class AdminInput implements InputPort{
         pet.setPetRace(race);
         pet.setPetWeight(weigth);
         adminService.registerPet(pet);
-        System.out.println("Madcota Registrada");
         System.out.println(toStringPet(pet));
     }
 
@@ -204,7 +202,7 @@ public class AdminInput implements InputPort{
         System.out.print("Cedula del dueño: ");
         long personDocument = personValidator.documentValudator(Utils.getReader().nextLine());
         System.out.print("Documento del veterinario: ");
-        long userDocument = userValidator.documentValudator(Utils.getReader().nextLine());
+        long userDocument = userValidator.documentValidator(Utils.getReader().nextLine());
         System.out.print("Nombre del medicamento: ");
         String medicationName = orderValidator.nameValidator(Utils.getReader().nextLine());
         System.out.print("Dosis del medicamento: ");
@@ -213,8 +211,8 @@ public class AdminInput implements InputPort{
         Person person = new Person();
         User user = new User();
         pet.setPetId(petId);
-        person.setPersonDocument(personDocument);
-        user.setPersonDocument(userDocument);
+        person.setDocument(personDocument);
+        user.setDocument(userDocument);
         Order order = new Order();
         order.setMedicationName(medicationName);
         order.setMedicationDosis(medicationDosis);
@@ -241,22 +239,22 @@ public class AdminInput implements InputPort{
         long orderId = orderValidator.orderIdValidator(Utils.getReader().nextLine());
         Order order = new Order();
         order.setOrderId(orderId);
-        order = adminService.medicalReportPort.getOrderByOrderId(adminService, orderId);
-        String vacumHistory = validVaccinationHistory(order.getPet());
+        order = adminService.getOrderByOrderId(orderId);
+        String vaccinationHistory = validVaccinationHistory(order.getPet());
         System.out.print("Allergia a medicamentos: ");
         String allergies = clinicaValidator.stringClinicaValidator(Utils.getReader().nextLine());
         System.out.print("Detalles del tratamiento: ");
-        String procedureDetails = clinicaValidator.stringClinicaValidator(Utils.getReader().nextLine());
+        String detailProcedure = clinicaValidator.stringClinicaValidator(Utils.getReader().nextLine());
         
         MedicalReport medicalReport = new MedicalReport();
         medicalReport.setConsultation(consultation);
         medicalReport.setDiagnostic(diagnostic);
         medicalReport.setSymptoms(symptoms);
-        medicalReport.setDetailProcedure(procedure);
+        medicalReport.setProcedure(procedure);
         medicalReport.setOrder(order);
-        medicalReport.setVaccinationHistory(vacumHistory);
+        medicalReport.setVaccinationHistory(vaccinationHistory);
         medicalReport.setAllergies(allergies);
-        medicalReport.setDetailProcedure(procedureDetails);
+        medicalReport.setDetailProcedure(detailProcedure);
         adminService.registerMedicalReport(medicalReport);
         System.out.println("Historia Clinica Creada");
         System.out.println(toStringClinica(medicalReport));
@@ -267,7 +265,7 @@ public class AdminInput implements InputPort{
             Order order = new Order();
             System.out.print("Ingrese el id de la order: ");
             long orderId = orderValidator.orderIdValidator(Utils.getReader().nextLine());
-            order = adminService.medicalReportPort.getOrderByOrderId(adminService, orderId);
+            order = adminService.getOrderByOrderId(orderId);
             System.out.println(toStringOrder(order));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -278,8 +276,8 @@ public class AdminInput implements InputPort{
         try {
             MedicalReport medicalReport = new MedicalReport();
             System.out.print("Ingrese el id de la Historia Clinica: ");
-            long clinicalRecordId = clinicaValidator.clinicaIdValidator(Utils.getReader().nextLine());
-            medicalReport = adminService.getClinicalRecordByMedicalReportId(clinicalRecordId);
+            long medicalReportId = clinicaValidator.medicalReportIdValidator(Utils.getReader().nextLine());
+            medicalReport = medicalReport.getMedicalReportByMedicalReportId(medicalReportId);
             System.out.println(toStringClinica(medicalReport));
             }
          catch (Exception e) {
@@ -288,59 +286,61 @@ public class AdminInput implements InputPort{
     } 
     
     private String toStringOrder(Order order){
-        return "\nID Order: "+order.getOrderId()+"\nId Mascota: "+order.getPet().getPetId()+"\nCedula Dueño: "+order.getOwner().getPersonDocument()
-                                    +"\nCedula Veterinario: "+order.getVeterinarian().getPersonDocument()+"\nNombre medigamento: "+order.getMedicationName()
+        return "\nID Order: "+order.getOrderId()+"\nId Mascota: "+order.getPet().getPetId()+"\nCedula Dueño: "+order.getOwner().getDocument()
+                                    +"\nCedula Veterinario: "+order.getVeterinarian().getDocument()+"\nNombre medigamento: "+order.getMedicationName()
                                     +"\nDosis: "+order.getMedicationDosis()+"\nFecha: "+order.getDate()+"\nEstado: "+order.getOrderStatus();
     }
 
     private String toStringClinica(MedicalReport medicalReport){
-        return "\nID Historia Clinica: "+medicalReport.getMedicalReportId()+"\nFecha: "+medicalReport.getDate()+"\nMotivo de consulta: "+medicalReport.getConsultation()
-                                    +"\nDiagnostico: "+medicalReport.getDiagnostic()+"\nSintomatología: "+medicalReport.getSymptoms()+"\nTratamiento: "+medicalReport.getprocedure()
-                                    +"\nId Order: "+medicalReport.getOrder().getOrderId()+"\nId Mascota: "+medicalReport.getOrder().getPet().getPetId()+"\nCedula Dueño: "+medicalReport.getOrder().getOwner().getPersonDocument()
-                                    +"\nCedula Veterinario: "+medicalReport.getOrder().getVeterinarian().getPersonDocument()+"\nNombre medicamento: "+medicalReport.getOrder().getMedicationName()+"\nDosis: "+medicalReport.getOrder().getMedicationDosis()
+        return "\nID Historia Clinica: "+medicalReport.getMedicalReportId()+"\nFecha: "+medicalReport.getDateCreated()+"\nMotivo de consulta: "+medicalReport.getConsultation()
+                                    +"\nDiagnostico: "+medicalReport.getDiagnostic()+"\nSintomatología: "+medicalReport.getSymptoms()+"\nTratamiento: "+medicalReport.getProcedure()
+                                    +"\nId Order: "+medicalReport.getOrder().getOrderId()+"\nId Mascota: "+medicalReport.getOrder().getPet().getPetId()+"\nCedula Dueño: "+medicalReport.getOrder().getOwner().getDocument()
+                                    +"\nCedula Veterinario: "+medicalReport.getOrder().getVeterinarian().getDocument()+"\nNombre medicamento: "+medicalReport.getOrder().getMedicationName()+"\nDosis: "+medicalReport.getOrder().getMedicationDosis()
                                     +"\nHistorial de vacunas: "+medicalReport.getVaccinationHistory()+"\nAlergia a medicamentos: "+medicalReport.getAllergies()
                                     +"\nDetalles del tratamiento: "+medicalReport.getDetailProcedure()+"\n";
     }
 
     private String toStringPet(Pet pet){
-        return "\nDocumento del dueño: "+pet.getPersonId().getPersonDocument()+"\nNombre del dueño: "+pet.getPersonId().getPersonName()+"\nID Mascota: "+pet.getPetId()+"\nNombre: "+pet.getPetName()+"\nEdad: "+pet.getPetAge()+"\nEspecie: "+pet.getPetSpecies()+"\nRaza: "+pet.getPetRace()+"\nPeso(Kg): "+pet.getPetWeight();
+        return "\nDocumento del dueño: "+pet.getPersonId().getDocument()+"\nNombre del dueño: "+pet.getPersonId().getName()+"\nID Mascota: "+pet.getPetId()+"\nNombre: "+pet.getPetName()+"\nEdad: "+pet.getPetAge()+"\nEspecie: "+pet.getPetSpecies()+"\nRaza: "+pet.getPetRace()+"\nPeso(Kg): "+pet.getPetWeight();
     }
     private String toStringPerson(Person person){
-        return "\nNombre: "+person.getPersonName()+"\nDocumento: "+person.getPersonDocument()+"\nEdad: "+person.getPersonAge();
+        return "\nNombre: "+person.getName()+"\nDocumento: "+person.getDocument()+"\nEdad: "+person.getAge();
     }
 
     private String validPet() throws Exception {
-        String option = "";
-        boolean validOption = false;  
-    
-        while (!validOption) {  
-            try {
-                System.out.println("1. Perro 2. Gato 3. Otro");
-                option = Utils.getReader().nextLine(); 
-                
-                switch (option) {
-                    case "1":
-                        validOption = true; 
-                        return "Perro";
-                    case "2":
-                        validOption = true;
-                        return "Gato";
-                    case "3":
-                        validOption = true; 
-                        System.out.println("Ingrese la especie: ");
-                        String otherPet = Utils.getReader().nextLine();
-                        return otherPet;
-                    default:
-                        System.out.println("Opción inválida. Por favor, ingrese 1 para Perro, 2 para Gato, o 3 para Otro.");
-                        break;  
+        
+        while (true) {  
+           String typePet=typePet();
+           if (!typePet.equals("")){
+                return typePet;
                 }
-            } catch (Exception e) {
-                System.out.println("Ocurrió un error: " + e.getMessage());
-                return e.getMessage();  
-            }
         }
-    
-        return "";
+        
+    }
+
+
+    private String typePet(){
+        try {
+            System.out.println("1. Perro 2. Gato 3. Otro");
+            String option = Utils.getReader().nextLine(); 
+            
+            switch (option) {
+                case "1":
+                    return "Perro";
+                case "2":
+                    return "Gato";
+                case "3":
+                    System.out.println("Ingrese la especie: ");
+                    String otherPet = Utils.getReader().nextLine();
+                    return otherPet;
+                default:
+                    System.out.println("Opción inválida. Por favor, ingrese 1 para Perro, 2 para Gato, o 3 para Otro.");
+                    return "";  
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error: " + e.getMessage());
+            return "";
+        }
     }
 
     private String validVaccinationHistory(Pet pet) throws Exception{
@@ -351,4 +351,5 @@ public class AdminInput implements InputPort{
         }
         return "No aplica";
     }
+
 }

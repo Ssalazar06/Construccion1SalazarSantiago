@@ -31,8 +31,4 @@ public class User extends Person{
         this.password = password;
         this.role = role;
     }
-    public User findByPersonDocument(UserAdapter userAdapter, Long personDocument) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByPersonDocument'");
-    }
 }

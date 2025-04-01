@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class MedicalReport {
     
-    private long MedicalReportId;
+    private long medicalReportId;
     private Timestamp dateCreated;
     private String Consultation;
     private String symptoms;
@@ -23,10 +23,11 @@ public class MedicalReport {
     private String allergies;
     private String detailProcedure;
     
+
     public MedicalReport(long medicalReportId, Timestamp dateCreated, String consultation, String symptoms,
             String diagnostic, String procedure, Order order, String vaccinationHistory, String allergies,
             String detailProcedure) {
-        MedicalReportId = medicalReportId;
+        this.medicalReportId = medicalReportId;
         this.dateCreated = dateCreated;
         Consultation = consultation;
         this.symptoms = symptoms;
@@ -36,5 +37,9 @@ public class MedicalReport {
         this.vaccinationHistory = vaccinationHistory;
         this.allergies = allergies;
         this.detailProcedure = detailProcedure;
+    }
+    public String getClinicaId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getClinicaId'");
     }
 }

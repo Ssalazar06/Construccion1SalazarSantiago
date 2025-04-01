@@ -30,17 +30,17 @@ public class VeterinaryServices {
     private OrderPort orderPort;
 
     public void registerPet(Pet pet) throws Exception{
-        Person person = personPort.findByPersonDocument(pet.getPersonId().getPersonDocument());
+        Person person = personPort.findByPersonDocument(pet.getPersonId().getDocument());
         if(person == null){
-            throw new Exception("No existe una persona con ese documetno");
+            throw new Exception("No existe una persona con ese documento");
         }
         
-        pet.setPersonDocument(person);
+        pet.setPersonId(person);
         petPort.savePet(pet);
     }
     
     public void registerClient(Person person)throws Exception{
-        if(personPort.existPerson(person.getPersonDocument())){
+        if(personPort.existPerson(person.getDocument())){
             throw new Exception("Ya existe una Ciente con esa cedula");
         }
         personPort.savePerson(person);
@@ -49,8 +49,8 @@ public class VeterinaryServices {
 
     public void registerOrder(Order order) throws Exception{
         Pet pet = petPort.findByPetId(order.getPet().getPetId());
-        Person person = personPort.findByPersonDocument(order.getOwner().getPersonDocument());
-        User user = userPort.findByPersonDocument(order.getVeterinarian().getPersonDocument());
+        Person person = personPort.findByPersonDocument(order.getOwner().getDocument());
+        User user = userPort.findByPersonDocument(order.getVeterinarian().getDocument());
         if(pet == null){
             throw new Exception("No existe mascota con ese ID");
         }

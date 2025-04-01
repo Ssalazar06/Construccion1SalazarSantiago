@@ -27,15 +27,15 @@ public class MedicalReportEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long medicalReportId;
     @Column(name="date")
-    private Timestamp date;
+    private Timestamp dateCreated;
     @Column(name ="consultation")
     private String consultation;
     @Column(name="syntomatology")
-    private String syntomatology;
+    private String symptoms;
     @Column(name="diagnostic")
     private String diagnostic;
     @Column(name="treatment")
-    private String treatment;
+    private String procedure;
     //Obtener Cliente, Mascota y Veterinario
     @JoinColumn(name="order_id")
     @OneToOne

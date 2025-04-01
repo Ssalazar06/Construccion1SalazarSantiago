@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.adapters.inputs.utils.ClinicaValidator;
-import app.adapters.inputs.utils.OrdenValidator;
+import app.adapters.inputs.utils.OrderValidator;
 import app.adapters.inputs.utils.PersonValidator;
 import app.adapters.inputs.utils.PetValidator;
 import app.adapters.inputs.utils.UserValidator;
@@ -30,7 +30,7 @@ public class VeterinarianInput implements InputPort {
     @Autowired
     private UserValidator userValidator;
     @Autowired
-    private OrdenValidator orderValidator;
+    private OrderValidator orderValidator;
     @Autowired
     private ClinicaValidator medicalReportValidator;
     @Autowired

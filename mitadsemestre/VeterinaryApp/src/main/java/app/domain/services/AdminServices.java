@@ -33,7 +33,7 @@ public class AdminServices{
     public MedicalReportPort medicalReportPort;
 
     public void registerVeterinarian(User user)throws Exception{
-        if(personPort.existPerson(user.getPersonDocument())){
+        if(personPort.existPerson(user.getDocument())){
             throw new Exception("Ya existe un veterinario con ese nombre");
         }
         if(userPort.existUserName(user.getUserName())){
@@ -44,7 +44,7 @@ public class AdminServices{
     }
 
     public void registerSeller(User user)throws Exception{
-        if(personPort.existPerson(user.getPersonDocument())){
+        if(personPort.existPerson(user.getDocument())){
             throw new Exception("Ya existe un vendedor con ese nombre");
         }
         if(userPort.existUserName(user.getUserName())){
@@ -56,7 +56,7 @@ public class AdminServices{
     }
     
     public void registerOwner(Person person) throws Exception{
-        if(personPort.existPerson(person.getPersonDocument())){
+        if(personPort.existPerson(person.getDocument())){
             throw new Exception("Ya existe un cliente con ese documento");
         }
         
@@ -64,7 +64,7 @@ public class AdminServices{
     }
 
     public void registerPet(Pet pet) throws Exception{
-        Person person = personPort.findByPersonDocument(pet.getPersonId().getPersonDocument());
+        Person person = personPort.findByPersonDocument(pet.getPersonId().getDocument());
         if(person == null){
             throw new Exception("No existe una persona con ese documetno");
         }
@@ -74,8 +74,8 @@ public class AdminServices{
 
     public void registerOrder(Order orden)throws Exception{
         Pet pet = petPort.findByPetId(orden.getPet().getPetId());
-        Person person = personPort.findByPersonDocument(orden.getOwner().getPersonDocument());
-        User user = userPort.findByPersonDocument(orden.getVeterinarian().getPersonDocument());
+        Person person = personPort.findByPersonDocument(orden.getOwner().getDocument());
+        User user = userPort.findByPersonDocument(orden.getVeterinarian().getDocument());
         if(pet == null){
             throw new Exception("No existe una mascota con ese documento");
         }

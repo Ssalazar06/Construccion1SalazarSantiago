@@ -7,9 +7,9 @@ import app.adapters.invoice.entity.InvoiceEntity;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Long>{
-    public InvoiceEntity findByOrdenOrderId(long orderId);
-    public InvoiceEntity findByOrdenPetPetId(long petId);
-    public InvoiceEntity findByOrdenPersonDocument(long personDocument);
-    public InvoiceEntity findByOrdenUserPersonDocument(long personDocument);
+    public InvoiceEntity findByOrderOrderId(long orderId);
+    public InvoiceEntity findByOrderPetPetId(long petId);
+    public InvoiceEntity findByOrderPersonDocument(long personDocument);
+    public InvoiceEntity findByOrderUserPersonDocument(long personDocument);
     public InvoiceEntity findByInvoiceId(long invoiceId);
 } 

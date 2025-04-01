@@ -7,7 +7,7 @@ import app.adapters.MedicalReport.entity.MedicalReportEntity;
 
 @Repository
 public interface MedicalReportRepository extends JpaRepository<MedicalReportEntity, Long>{
-    public MedicalReportEntity findByOrderId(long orderId);
+    public MedicalReportEntity findByOrderOrderId(long orderId);
     public MedicalReportEntity findByOrderPetPetId(long petId);
     public MedicalReportEntity findByOrderPersonDocument(long personDocument);
     public MedicalReportEntity findByMedicalReportId(long medicalReportId);

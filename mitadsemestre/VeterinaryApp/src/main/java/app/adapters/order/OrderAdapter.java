@@ -36,13 +36,13 @@ public class OrderAdapter implements OrderPort{
         orderRepository.save(orderEntity);
         order.setOrderId(orderEntity.getOrderId());
         order.setDate(orderEntity.getDate());
-        System.out.println("Order Created");
+        System.out.println("Orden creada");
     }
     
     @Override
     public Order findByOrderId(long orderId) throws Exception {
         Order order = orderAdapter(orderRepository.findByOrderId(orderId));
-        if(order == null) { throw new Exception("No order exists with that ID"); }
+        if(order == null) { throw new Exception("No existe una orden con este numero"); }
         return order;
     }
     
@@ -51,12 +51,29 @@ public class OrderAdapter implements OrderPort{
         orderEntity.setOrderId(order.getOrderId());
         orderEntity.setPet(petAdapter(order.getPet()));
         orderEntity.setPerson(personAdapter(order.getOwner()));
-        orderEntity.setUser(UserAdapter(order.getVeterinarian()));
+        orderEntity.setUser(userAdapter(order.getVeterinarian()));
         orderEntity.setMedicationName(order.getMedicationName());
         orderEntity.setMedicationDosis(order.getMedicationDosis());
         orderEntity.setDate(order.getDate());
         orderEntity.setOrderStatus(order.getOrderStatus());
         return orderEntity;
+    }
+
+    
+    private UserEntity userAdapter(User user){
+        //reemplazo metodo personAdpter por mala implementación
+        PersonEntity personEntity = new PersonEntity();
+        personEntity.setName(user.getName());
+        personEntity.setDocument(user.getDocument());
+        personEntity.setAge(user.getAge());
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setPerson(personEntity);
+        userEntity.setUserId(user.getUserId());
+        userEntity.setUserName(user.getUserName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setRole(user.getRole());
+        return userEntity;
     }
     
     private Order orderAdapter(OrderEntity orderEntity) {
@@ -72,6 +89,18 @@ public class OrderAdapter implements OrderPort{
         return order;
     }
     
+    public User userAdapter(UserEntity userEntity){
+        User user = new User();
+        user.setDocument(userEntity.getPerson().getDocument());
+        user.setName(userEntity.getPerson().getName());
+        user.setAge(userEntity.getPerson().getAge());
+        user.setUserId(userEntity.getUserId());
+        user.setUserName(userEntity.getUserName());
+        user.setPassword(userEntity.getPassword());
+        user.setRole(userEntity.getRole());
+        return user;
+    }
+
     private PetEntity petAdapter(Pet pet) {
         PetEntity petEntity = new PetEntity();
         petEntity.setPetId(pet.getPetId());
@@ -85,9 +114,9 @@ public class OrderAdapter implements OrderPort{
     
     private PersonEntity personAdapter(Person person) {
         PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonName(person.getPersonName());
-        personEntity.setPersonDocument(person.getPersonDocument());
-        person.setPersonAge(person.getPersonAge());
+        personEntity.setName(person.getName());
+        personEntity.setDocument(person.getDocument());
+        person.setAge(person.getAge());
         return personEntity;
     }
     
@@ -104,9 +133,9 @@ public class OrderAdapter implements OrderPort{
     
     private Person personAdapter(PersonEntity personEntity) {
         Person person = new Person();
-        person.setPersonName(personEntity.getPersonName());
-        person.setPersonDocument(personEntity.getPersonDocument());
-        person.setPersonAge(personEntity.getPersonAge());
+        person.setName(personEntity.getName());
+        person.setDocument(personEntity.getDocument());
+        person.setAge(personEntity.getAge());
         return person;
     }
 

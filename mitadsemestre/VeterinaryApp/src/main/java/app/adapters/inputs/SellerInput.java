@@ -3,8 +3,8 @@ package app.adapters.inputs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.adapters.inputs.utils.InvoicedValidator;
-import app.adapters.inputs.utils.OrdenValidator;
+import app.adapters.inputs.utils.InvoiceValidator;
+import app.adapters.inputs.utils.OrderValidator;
 import app.adapters.inputs.utils.Utils;
 import app.domain.models.Invoice;
 import app.domain.models.Order;
@@ -20,14 +20,14 @@ import lombok.Setter;
 @Component
 public class SellerInput implements InputPort{
     @Autowired
-    private OrdenValidator ordenValidator;
+    private OrderValidator orderValidator;
 
     @Autowired
-    private InvoicedValidator invoicedValidator;
+    private InvoiceValidator invoicedValidator;
 
     @Autowired
     private SellerService sellerService;
-    private final String MENU = "Ingrese la opción: "+"\n 1. Crear Factura"+"\n 2. Ver Factura"+"\n 3. Ver Todas las facturas" + "\n 4. Ver Orden" + "\n 5. Ver Todas las ordenes"+"\n 6. Salir";
+    private final String MENU = "Ingrese la opción: "+"\n 1. Crear Factura"+"\n 2. Ver Factura"+"\n 3. Ver Todas las facturas" + "\n 4. Ver Order" + "\n 5. Ver Todas las orderes"+"\n 6. Salir";
     @Override
     public void menu() throws Exception {
         boolean sesion = true;
@@ -48,14 +48,14 @@ public class SellerInput implements InputPort{
                     this.getInvoiced();
                     return true;
                 case "3":
-                    sellerService.getAllInvoiced().forEach(invoiced -> System.out.println(toStringInvoiced(invoiced)));
+                    sellerService.getAllInvoiced().forEach(invoiced -> System.out.println(toStringInvoice(invoiced)));
                     System.out.println();
                     return true;
                 case "4":
-                    this.getOrden();
+                    this.getOrder();
                     return true;
                 case "5":
-                    sellerService.getAllOrden().forEach(orden -> System.out.println(toStringOrden(orden)));
+                    sellerService.getAllOrder().forEach(order -> System.out.println(toStringOrder(order)));
                     System.out.println();
                     return true;
                 case "6":
@@ -71,11 +71,11 @@ public class SellerInput implements InputPort{
     }
 
     private void createInvoiced() throws Exception{
-        System.out.print("Ingrese el id de la orden: ");
-        long ordenId = ordenValidator.ordenIdValidator(Utils.getReader().nextLine());
+        System.out.print("Ingrese el id de la order: ");
+        long orderId = orderValidator.orderIdValidator(Utils.getReader().nextLine());
         Order order = new Order();
-        order.setOrderId(ordenId);
-        order = sellerService.getOrdenByOrdenId(orderId);
+        order.setOrderId(orderId);
+        order = sellerService.getOrderByOrderId(orderId);
         System.out.println();
         System.out.println(toStringOrder(order));
         System.out.println();
@@ -85,10 +85,10 @@ public class SellerInput implements InputPort{
         System.out.print("Cantidad de medicamentos: ");
         long medicationQuantity = invoicedValidator.quantityValidator(Utils.getReader().nextLine());
         Invoice invoice = new Invoice();
-        invoice.setOrden(orden);
+        invoice.setOrder(order);
         invoice.setAmount(amount);
         invoice.setMedicationQuantity(medicationQuantity);
-        invoice.setProduct(product);
+        invoice.setItem(product);
         sellerService.saveInvoice(invoice);
         System.out.println("Factura creada");
         System.out.println(toStringInvoice(invoice));
@@ -98,7 +98,7 @@ public class SellerInput implements InputPort{
         try {
             Invoice invoice = new Invoice();
             System.out.print("Ingrese el id de la factura: ");
-            long invoicedId = invoicedValidator.invoicedIdValidator(Utils.getReader().nextLine());
+            long invoiceId =    InvoiceValidator.invoiceIdValidator(Utils.getReader().nextLine());
             invoice = sellerService.getInvoiceByInvoiceId(invoiceId);
             System.out.println(toStringInvoice(invoice));
         } catch (Exception e) {
@@ -110,9 +110,9 @@ public class SellerInput implements InputPort{
     private void getOrder(){
         try {
             Order order = new Order();
-            System.out.print("Ingrese el id de la orden: ");
-            long ordenId = ordenValidator.ordenIdValidator(Utils.getReader().nextLine());
-            order = sellerService.getOrderByOrderId(ordenId);
+            System.out.print("Ingrese el id de la order: ");
+            long orderId = orderValidator.orderIdValidator(Utils.getReader().nextLine());
+            order = sellerService.getOrderByOrderId(orderId);
             System.out.println(toStringOrder(order));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -121,9 +121,9 @@ public class SellerInput implements InputPort{
 
 
     private String toStringOrder(Order order){
-        return "\nID Orden: "+order.getOrderId()+"\nId Mascota: "+order.getPet().getPetId()+"\nCedula Dueño: "+order.getOwner().getPersonDocument()
-        +"\nCedula Veterinario: "+order.getVeterinarian().getPersonDocument()+"\nNombre medigamento: "+order.getMedicationName()
-        +"\nDosis: "+order.getMedicationDosis()+"\nFecha Orden: "+order.getDate()+"\nEstado: "+order.getOrderStatus()+"\n";
+        return "\nID Order: "+order.getOrderId()+"\nId Mascota: "+order.getPet().getPetId()+"\nCedula Dueño: "+order.getOwner().getDocument()
+        +"\nCedula Veterinario: "+order.getVeterinarian().getDocument()+"\nNombre medigamento: "+order.getMedicationName()
+        +"\nDosis: "+order.getMedicationDosis()+"\nFecha Order: "+order.getDate()+"\nEstado: "+order.getOrderStatus()+"\n";
     }
 
     private String toStringInvoice(Invoice invoice){

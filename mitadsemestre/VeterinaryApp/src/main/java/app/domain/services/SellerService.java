@@ -16,7 +16,7 @@ public class SellerService {
     @Autowired
     private InvoicePort invoicedPort;
 
-    public void saveInvoiced(Invoice invoice) throws Exception {
+    public void saveInvoice(Invoice invoice) throws Exception {
         invoicedPort.saveInvoice(invoice);
     }
 
@@ -44,6 +44,11 @@ public class SellerService {
 
     public List<Order> getAllOrder() throws Exception {
         return ordenPort.getAllOrder();
+    }
+
+    public Invoice getInvoiceByInvoiceId(long invoiceId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInvoiceByInvoiceId'");
     }
 
 }

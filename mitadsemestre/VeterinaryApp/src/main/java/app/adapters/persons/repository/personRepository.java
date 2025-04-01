@@ -8,8 +8,8 @@ import app.adapters.persons.entity.PersonEntity;
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
-    public boolean  existsByPersonDocument(long personDocument);
+    public boolean  existsByDocument(long document);
 
-    public PersonEntity findByPersonDocument(long personDocument);
+    public PersonEntity findByDocument(long document);
 
 }

@@ -9,14 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Person {
 
-    private long personDocument;
-    private String personName;
-    private long personAge;
+    private long Document;
+    private String Name;
+    private long Age;
     
-    public Person(long personDocument, String personName, long personAge) {
-
-        this.personDocument = personDocument;
-        this.personName = personName;
-        this.personAge = personAge;
+    public Person(long document, String name, long age) {
+        Document = document;
+        Name = name;
+        Age = age;
     }
+
 }

@@ -80,7 +80,7 @@ public class LoginInput implements InputPort{
     private void login(){
         try {
             
-            inputs.put("admin", adminInput);
+            inputs.put( "admin", adminInput);
             inputs.put("veterinary", veterinarianInput);
             inputs.put("seller", sellerInput);
 
