@@ -10,4 +10,14 @@ class VeterinaryAppApplicationTests {
 	void contextLoads() {
 	}
 
+    @Test
+    void testMain() {
+        
+    }
+
+    @Test
+    void testRun() {
+        
+    }
+
 }

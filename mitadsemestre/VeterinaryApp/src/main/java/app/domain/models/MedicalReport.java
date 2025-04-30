@@ -42,4 +42,8 @@ public class MedicalReport {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getClinicaId'");
     }
+    public MedicalReport getMedicalReportByMedicalReportId(long medicalReportId2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMedicalReportByMedicalReportId'");
+    }
 }
