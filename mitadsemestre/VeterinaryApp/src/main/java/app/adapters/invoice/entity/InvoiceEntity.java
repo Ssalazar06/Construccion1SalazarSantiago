@@ -31,8 +31,8 @@ public class InvoiceEntity{
     private OrderEntity order;
     @Column(name="amount")
     private double amount;
-    @Column(name="medication_quantity")
-    private long medicationQuantity;
+    @Column(name="medication_Dosis")
+    private long medicationDosis;
     @Column(name ="item")
     private String item;
     @Column(name="date")

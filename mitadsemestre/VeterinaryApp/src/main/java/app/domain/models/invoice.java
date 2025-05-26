@@ -17,15 +17,15 @@ public class Invoice {
     private Order order;
     private String item;
     private double amount;
-    private long medicationQuantity;
+    private long medicationDosis;
     private Timestamp date;
 
-    public Invoice(long invoiceId, Order order, String item, double amount, long medicationQuantity, Timestamp date) {
+    public Invoice(long invoiceId, Order order, String item, double amount, long medicationDosis, Timestamp date) {
         this.invoiceId = invoiceId;
         this.order = order;
         this.item = item;
         this.amount = amount;
-        this.medicationQuantity = medicationQuantity;
+        this.medicationDosis = medicationDosis;
         this.date = date;
     }
 }

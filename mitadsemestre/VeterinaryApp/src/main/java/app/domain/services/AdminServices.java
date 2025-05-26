@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.adapters.inputs.AdminInput;
 import app.domain.models.MedicalReport;
 import app.domain.models.Order;
 import app.domain.models.Person;

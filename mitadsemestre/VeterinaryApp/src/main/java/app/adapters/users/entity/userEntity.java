@@ -1,6 +1,6 @@
 package app.adapters.users.entity;
 
-import app.adapters.persons.entity.PersonEntity;
+import app.adapters.person.entity.PersonEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

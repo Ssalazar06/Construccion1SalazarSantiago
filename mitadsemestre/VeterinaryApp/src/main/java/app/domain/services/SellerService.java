@@ -12,38 +12,38 @@ import app.ports.OrderPort;
 @Service
 public class SellerService {
     @Autowired
-    private OrderPort ordenPort;
+    private OrderPort orderPort;
     @Autowired
-    private InvoicePort invoicedPort;
+    private InvoicePort invoicePort;
 
     public void saveInvoice(Invoice invoice) throws Exception {
-        invoicedPort.saveInvoice(invoice);
+        invoicePort.saveInvoice(invoice);
     }
 
-    public Order getOrderByOrderId(long ordenId)throws Exception {
-        Order orden = ordenPort.findByOrderId(ordenId);
-        if(orden == null){
-            throw new Exception("No existe una orden con ese ID");
+    public Order getOrderByOrderId(long orderId)throws Exception {
+        Order order = orderPort.findByOrderId(orderId);
+        if(order == null){
+            throw new Exception("No existe una order con ese ID");
         }
-        System.out.println(orden.getOrderStatus());
-        return orden;
+        System.out.println(order.getOrderStatus());
+        return order;
     }
 
-    public Invoice getInvoicedByInvoicedId(long invoiceId) throws Exception {
-        Invoice invoiced = invoicedPort.findByInvoiceId(invoiceId);
-        if(invoiced == null){
+    public Invoice getinvoiceByinvoiceId(long invoiceId) throws Exception {
+        Invoice invoice = invoicePort.findByInvoiceId(invoiceId);
+        if(invoice == null){
             throw new Exception("No existe una factura con ese ID");
         }
-        System.out.println(invoiced.getOrder().getOrderStatus());
-        return invoiced;
+        System.out.println(invoice.getOrder().getOrderStatus());
+        return invoice;
     }
 
-    public List<Invoice> getAllInvoiced() throws Exception{
-       return invoicedPort.getAllInvoice();
+    public List<Invoice> getAllInvoice() throws Exception{
+       return invoicePort.getAllInvoice();
     }
 
     public List<Order> getAllOrder() throws Exception {
-        return ordenPort.getAllOrder();
+        return orderPort.getAllOrder();
     }
 
     public Invoice getInvoiceByInvoiceId(long invoiceId) {

@@ -1,5 +1,6 @@
 package app.ports;
 
+import app.domain.models.Order;
 import app.domain.models.User;
 
 public interface UserPort {
@@ -8,4 +9,5 @@ public interface UserPort {
     public void saveUser(User user)throws Exception;
     public User findByPersonDocument(long personDocument)throws Exception;
     public User findByUserName(User userName)throws Exception;
+    public User findByUserId(long userId)throws Exception;
 }

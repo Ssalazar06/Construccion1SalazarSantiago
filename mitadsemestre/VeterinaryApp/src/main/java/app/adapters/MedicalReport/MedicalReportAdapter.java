@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import app.adapters.MedicalReport.entity.MedicalReportEntity;
 import app.adapters.MedicalReport.repository.MedicalReportRepository;
 import app.adapters.order.entity.OrderEntity;
-import app.adapters.persons.entity.PersonEntity;
+import app.adapters.person.entity.PersonEntity;
 import app.adapters.pet.entity.PetEntity;
 import app.adapters.users.entity.UserEntity;
 import app.domain.models.MedicalReport;

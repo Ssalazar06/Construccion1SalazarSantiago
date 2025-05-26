@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import app.adapters.invoice.entity.InvoiceEntity;
 import app.adapters.invoice.repository.InvoiceRepository;
 import app.adapters.order.entity.OrderEntity;
-import app.adapters.persons.entity.PersonEntity;
+import app.adapters.person.entity.PersonEntity;
 import app.adapters.pet.entity.PetEntity;
 import app.adapters.users.entity.UserEntity;
 import app.domain.models.Invoice;
@@ -54,7 +54,7 @@ public class InvoiceAdapter implements InvoicePort{
         invoiceEntity.setInvoiceId(invoice.getInvoiceId());
         invoiceEntity.setItem(invoice.getItem());
         invoiceEntity.setAmount(invoice.getAmount());
-        invoiceEntity.setMedicationQuantity(invoice.getMedicationQuantity());
+        invoiceEntity.setMedicationDosis(invoice.getMedicationQuantity());
         invoiceEntity.setDate(invoice.getDate());    
         return invoiceEntity;
     }
@@ -130,7 +130,7 @@ public class InvoiceAdapter implements InvoicePort{
         invoice.setOrder(orderAdapter(invoiceEntity.getOrder()));
         invoice.setItem(invoiceEntity.getItem());
         invoice.setAmount(invoiceEntity.getAmount());
-        invoice.setMedicationQuantity(invoiceEntity.getMedicationQuantity());
+        invoice.setMedicationQuantity(invoiceEntity.getMedicationDosis());
         invoice.setDate(invoiceEntity.getDate());
         return invoice;
     }

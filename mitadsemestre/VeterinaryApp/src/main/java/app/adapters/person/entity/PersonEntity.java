@@ -1,4 +1,4 @@
-package app.adapters.persons.entity;
+package app.adapters.person.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
